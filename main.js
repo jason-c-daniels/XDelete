@@ -26,7 +26,7 @@ const deleteAllTweets = async () => {
       deleteButtons = getDeleteButtons().filter(button => !processedButtons.has(button));
       let i = 0;
       // wait for things to resolve for 30 minutes
-      while (deleteButtons.length === 0 && i < 100) {
+      while (deleteButtons.length === 0 && i < 1000) {
         await sendESC();
         i++;
         await delay(1000*(1+Math.random()*100*i)); // wait scaled by the number of retries

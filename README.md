@@ -1,10 +1,13 @@
-Script to delete all X / Twitter tweets. (Credits go to ChatGPT, I didn't write any of this code)
+Forked the original because ChatGPT is crap.
+But the basic framework was in place.
+Made many algoithm updates.
 
 ### How to run:
 - Open Chrome and go to your X profile (https://x.com/USERNAME/with_replies)
 - Open Chrome Developer Console. Copy/Paste the code:
 
 ```js
+
 const deleteAllTweets = async () => {
   const sendESC = async () => {
     window.dispatchEvent(
@@ -32,7 +35,7 @@ const deleteAllTweets = async () => {
       deleteButtons = getDeleteButtons().filter(button => !processedButtons.has(button));
       let i = 0;
       // wait for things to resolve for 30 minutes
-      while (deleteButtons.length === 0 && i < 100) {
+      while (deleteButtons.length === 0 && i < 1000) {
         await sendESC();
         i++;
         await delay(1000*(1+Math.random()*100*i)); // wait scaled by the number of retries

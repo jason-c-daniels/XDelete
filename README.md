@@ -22,6 +22,10 @@ const deleteAllTweets = async () => {
       while (deleteButtons.length === 0 && i < 300) {
         i++;
         await delay(1000*10); // wait 10 seconds
+        window.scrollTo(0, document.body.scrollHeight);
+        await delay(0);
+        window.scrollTo(0, document.body.scrollHeight);
+        await delay(500);
         deleteButtons = getDeleteButtons().filter(button => !processedButtons.has(button));
       }
       // if not resolved go back to the top ofthe loop.

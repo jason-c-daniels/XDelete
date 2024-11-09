@@ -11,10 +11,17 @@ const deleteAllTweets = async () => {
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
   while (true) {
-    await delay(3000);
-    const deleteButtons = getDeleteButtons().filter(button => !processedButtons.has(button));
-    if (deleteButtons.length === 0) break;
-
+    await delay(2000);
+    let deleteButtons = getDeleteButtons().filter(button => !processedButtons.has(button));
+    if (deleteButtons.length === 0) {
+      window.scrollTo(0, document.body.scrollHeight);
+      await delay(3000);
+      deleteButtons = getDeleteButtons().filter(button => !processedButtons.has(button));
+      if (deleteButtons.length === 0) {
+        await delay(1000*30*60); // wait 30 minutes
+        continue;
+      }
+    }
     for (const button of deleteButtons) {
       await delay(2000);
       processedButtons.add(button);
@@ -39,8 +46,6 @@ const deleteAllTweets = async () => {
         }
       }
     }
-    window.scrollTo(0, document.body.scrollHeight);
-	await delay(2000);
   }
 
   console.log('All tweets deleted successfully!');

@@ -7,8 +7,20 @@ Made many algoithm updates.
 - Open Chrome Developer Console. Copy/Paste the code:
 
 ```js
-
 const deleteAllTweets = async () => {
+  const clickRetry = () => {
+    var aTags = document.getElementsByTagName("span");
+    var searchText = "Retry";
+    var found;
+
+    for (var i = 0; i < aTags.length; i++) {
+      if (aTags[i].textContent == searchText) {
+        found = aTags[i];
+        break;
+      }
+    }
+    found?.click();
+  }
   const sendESC = async () => {
     window.dispatchEvent(
       new KeyboardEvent("keydown", {altKey: false,code: "Escape",
@@ -30,6 +42,7 @@ const deleteAllTweets = async () => {
     await sendESC();
     let deleteButtons = getDeleteButtons().filter(button => !processedButtons.has(button));
     if (deleteButtons.length === 0) {
+      clickRetry();
       window.scrollTo(0, document.body.scrollHeight);
       await delay(1500+Math.random()*100);
       deleteButtons = getDeleteButtons().filter(button => !processedButtons.has(button));
@@ -43,6 +56,8 @@ const deleteAllTweets = async () => {
         await delay(500+Math.random()*100);
         window.scrollTo(0, document.body.scrollHeight);
         await delay(500+Math.random()*100);
+        clickRetry();
+        await delay(2000+Math.random()*100);
         deleteButtons = getDeleteButtons().filter(button => !processedButtons.has(button));
       }
       // if not resolved go back to the top ofthe loop.
@@ -85,6 +100,5 @@ const deleteAllTweets = async () => {
 };
 
 deleteAllTweets();
-
 ```
 <img width="813" alt="Screenshot 2023-12-31 at 7 18 45 PM" src="https://github.com/techleadhd/XDelete/assets/61847557/473165c5-9b7c-4065-98fd-5856fcbfb3a8">
